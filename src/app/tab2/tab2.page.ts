@@ -24,11 +24,21 @@ export class Tab2Page {
 
     }
 
+    // crée la date de l'attestation : maintenant ou, si cheat, 15-20mn avant.
+    genDate(cheat) {
+        let date = new Date();
+        if (cheat) {
+            date.setMinutes(date.getMinutes() - 15 - (Math.floor(Math.random() * Math.floor(5))));
+        }
+
+        return date;
+    }
+
     // méthode pour créer les données de l'attestation
     gen() {
         let motifString: string;
         let attestation: Attestation;
-        let dateNow = new Date();
+        let dateNow = this.genDate(true);
 
         // formatage de l'heure
         let dateformated = dateNow.toLocaleDateString('fr-FR')
